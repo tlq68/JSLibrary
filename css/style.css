@@ -5,8 +5,8 @@
 .info-card {
   background-color: rgb(90, 90, 226);
   border: 2px solid lightblue;
-  width: 7em;
-  height: 12em;
+  width: 12em;
+  height: 18em;
 }
 
 #card_parent {
