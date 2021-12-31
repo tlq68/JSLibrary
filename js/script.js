@@ -34,7 +34,7 @@
 
     parentDiv = document.createElement('div');
     parentDiv.id = 'card_parent';
-    parentDiv.textContent = 'This is the parent';
+    // parentDiv.textContent = 'This is the parent';
     document.getElementsByTagName('body')[0].appendChild(parentDiv);
 
     const test = document.getElementById('#card_parent');
