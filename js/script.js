@@ -22,14 +22,35 @@
   function addBookToLibrary() {
     // For new book button
     newBookButton.addEventListener('click', function() {
-      
+
       content.textContent = initialBook['title'];
     });
   }
+
+  function displayLibrary() {
+    let divMaker;
+
+    for (i = 0; i < myLibrary.length; i++) {
+      divMaker = document.createElement('div');
+      divMaker.className = 'info-card';
+      divMaker.textContent = myLibrary[i]['title'];
+      document.getElementsByTagName('body')[0].appendChild(divMaker);
+    }
+  }
+
+
 
   let initialBook = new Book("The Hobbit", "J. R. R. Tolkien", 304, "Completed");
   let newBook2 = new Book("Test", "Mrs. Test", 100, "Not completed");
   let newBook3 = new Book("Test2", "Mr. Test", 200, "Completed");
 
+  myLibrary.push(initialBook);
+  myLibrary.push(newBook2);
+  myLibrary.push(newBook3);
+
+
+
+
   addBookToLibrary();
+  displayLibrary();
 })();
