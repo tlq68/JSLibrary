@@ -1,0 +1,35 @@
+(function () {
+  const p = document.querySelectorAll('p');
+  const newBookButton = document.querySelector('#new_book');
+  const content = document.querySelector('#content-text');
+
+  content.textContent = 'Is this working?';
+
+  for (let i = 0; i < p.length; i++) {
+    p[i].style.color = "red";
+  }
+
+  let myLibrary = [];
+
+  function Book(title, author, pages, read_status) {
+    // The constructor
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read_status = read_status;
+  }
+
+  function addBookToLibrary() {
+    // For new book button
+    newBookButton.addEventListener('click', function() {
+      
+      content.textContent = initialBook['title'];
+    });
+  }
+
+  let initialBook = new Book("The Hobbit", "J. R. R. Tolkien", 304, "Completed");
+  let newBook2 = new Book("Test", "Mrs. Test", 100, "Not completed");
+  let newBook3 = new Book("Test2", "Mr. Test", 200, "Completed");
+
+  addBookToLibrary();
+})();
