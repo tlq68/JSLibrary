@@ -3,6 +3,7 @@
   const newBookButton = document.querySelector('#new_book');
   const content = document.querySelector('#content-text');
 
+
   content.textContent = 'Is this working?';
 
   for (let i = 0; i < p.length; i++) {
@@ -29,13 +30,23 @@
 
   function displayLibrary() {
     let divMaker;
+    let parentDiv;
+
+    parentDiv = document.createElement('div');
+    parentDiv.id = 'card_parent';
+    parentDiv.textContent = 'This is the parent';
+    document.getElementsByTagName('body')[0].appendChild(parentDiv);
+
+    const test = document.getElementById('#card_parent');
 
     for (i = 0; i < myLibrary.length; i++) {
       divMaker = document.createElement('div');
       divMaker.className = 'info-card';
+      divMaker.id = `card${i+1}`;
       divMaker.textContent = myLibrary[i]['title'];
-      document.getElementsByTagName('body')[0].appendChild(divMaker);
+      document.getElementById('card_parent').appendChild(divMaker);
     }
+      parentDiv.children[1].style.backgroundColor = 'red';
   }
 
 
