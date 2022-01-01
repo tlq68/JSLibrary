@@ -18,5 +18,12 @@
   margin: auto;
 }
 
+#new_book_form {
+  background-color: blue;
+
+  width: 15em;
+  height: 20em;
+}
+
 
 

@@ -25,7 +25,22 @@
     newBookButton.addEventListener('click', function() {
 
       content.textContent = initialBook['title'];
+
+      // if(new book form is closed) { open the form} 
+      const newBookForm = document.createElement('div');
+      newBookForm.id = 'new_book_form';
+      document.getElementsByTagName('body')[0].appendChild(newBookForm);
+      newBookForm.innerHTML = ``;
+
+      // else { close the form}
     });
+  }
+
+  function addToLibraryTestingGround() {
+    const newBookForm = document.createElement('div');
+      newBookForm.id = 'new_book_form';
+      document.getElementsByTagName('body')[0].appendChild(newBookForm);
+      newBookForm.innerHTML = `<input placeholder="Title">` + `<br>` + `<input placeholder="Author">` + `<br>` + `<input placeholder="Number of pages">` + `Radio buttons go here`;
   }
 
   function displayLibrary() {
@@ -34,7 +49,6 @@
 
     parentDiv = document.createElement('div');
     parentDiv.id = 'card_parent';
-    // parentDiv.textContent = 'This is the parent';
     document.getElementsByTagName('body')[0].appendChild(parentDiv);
 
     const test = document.getElementById('#card_parent');
@@ -44,7 +58,7 @@
       divMaker.className = 'info-card';
       divMaker.id = `card${i+1}`;
       // `Title: ${myLibrary[i]['title']}` + `Author: ${myLibrary[i]['author']}` + `Pages: ${myLibrary[i]['pages']}` + `Read Status: ${myLibrary[i]['read_status']}` 
-      divMaker.innerHTML = `  Title: ${myLibrary[i]['title']}` + '<br><hr>' + `  Author: ${myLibrary[i]['author']}` + '<br><hr>' + `  Pages: ${myLibrary[i]['pages']}`+ '<br><hr>' + `  Read Status: ${myLibrary[i]['read_status']}` ;
+      divMaker.innerHTML = `Title: ${myLibrary[i]['title']}` + '<br><hr>' + `Author: ${myLibrary[i]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i]['read_status']}` ;
       document.getElementById('card_parent').appendChild(divMaker);
     }
       parentDiv.children[1].style.backgroundColor = 'red';
@@ -64,5 +78,6 @@
 
 
   addBookToLibrary();
+  addToLibraryTestingGround();
   displayLibrary();
 })();
