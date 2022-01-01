@@ -20,7 +20,7 @@
     this.read_status = read_status;
   }
 
-  function addBookToLibrary() {
+  function newBookButtonToggle() {
     // For new book button
     let formActive = false;
 
@@ -39,9 +39,12 @@
       <input type="text" id="page_numbers" name="page_numbers" placeholder="Number of pages" required>
       <label><input type="radio" id="not_completed" name="completion_status" value="Not Completed" checked>Not Completed</label>
       <label><input type="radio" id="completed" name="completion_status" value="Completed">Completed</label>
-      <input type="submit" value="Submit">
+      <input type="button" id="submit" value="Submit">
     </form>`;
       formActive = true;
+
+      
+      testing();
     }
        else { 
         //content.textContent = 'The button was triggered'
@@ -52,8 +55,17 @@
     });
   }
 
-  function addToLibraryTestingGround() {
-   
+  function testing() {
+
+    // The next goal is to get this same functionality, but without having to nest functions within functions.
+    const testButton = document.getElementById('submit');
+    const testTarget = document.getElementById('test-button');
+    testButton.addEventListener("click", function () {
+      testTarget.textContent = document.getElementById('author').value;
+    });
+  }
+  function addBooksToLibrary() {
+    
   }
 
   function displayLibrary() {
@@ -87,9 +99,10 @@
   myLibrary.push(newBook3);
 
 
+  
 
-
-  addBookToLibrary();
-  addToLibraryTestingGround();
+  newBookButtonToggle();
   displayLibrary();
+  //testing();
+  document.getElementById('test-button').style.color = "red"
 })();
