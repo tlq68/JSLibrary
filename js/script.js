@@ -73,7 +73,7 @@
       const targetAuthor = document.getElementById('author');
     const targetPages = document.getElementById('page_numbers');
 
-    if (targetTitle && targetAuthor && targetPages) {
+    if (targetTitle && targetTitle.value && targetAuthor.value && targetPages.value) {
     document.getElementById('card_parent').remove();
 
     let read_status_value;
@@ -92,6 +92,9 @@
 
         let newBook = new Book(targetTitle.value, targetAuthor.value, targetPages.value, read_status_value)
         myLibrary.push(newBook);
+        targetTitle.value = '';
+        targetAuthor.value = '';
+        targetPages.value = '';
   displayLibrary();
 
       // }
