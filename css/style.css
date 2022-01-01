@@ -9,6 +9,10 @@
   height: 18em;
 }
 
+.red-card {
+  background-color: rgb(235, 81, 81);
+}
+
 #card_parent {
   display: flex;
   justify-content: space-around;

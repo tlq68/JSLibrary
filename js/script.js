@@ -116,6 +116,9 @@
       divMaker.className = 'info-card';
       divMaker.id = `card${i+1}`;
       divMaker.innerHTML = `Title: ${myLibrary[i]['title']}` + '<br><hr>' + `Author: ${myLibrary[i]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i]['read_status']}` ;
+      if (myLibrary[i]['read_status'] === 'Not Completed') {
+        divMaker.classList.add("red-card")
+      }
       document.getElementById('card_parent').appendChild(divMaker);
     }
       //parentDiv.children[1].style.backgroundColor = 'red';
@@ -124,7 +127,7 @@
 
   function initializeLibrary() {
     let initialBook = new Book("The Hobbit", "J. R. R. Tolkien", 304, "Completed");
-  let newBook2 = new Book("Angels and Demons", "Dan Brown", 616, "Not completed");
+  let newBook2 = new Book("Angels and Demons", "Dan Brown", 616, "Not Completed");
   let newBook3 = new Book("The Miserable Mill", "Lemony Snicket", 195, "Completed");
 
   myLibrary.push(initialBook);
