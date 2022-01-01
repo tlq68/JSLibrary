@@ -1,7 +1,7 @@
 (function () {
   const p = document.querySelectorAll('p');
   const newBookButton = document.querySelector('#new_book');
-  const content = document.querySelector('#content-text');
+  const content = document.querySelector('#content');
 
 
   content.textContent = 'Is this working?';
@@ -49,7 +49,7 @@
 
     parentDiv = document.createElement('div');
     parentDiv.id = 'card_parent';
-    document.getElementsByTagName('body')[0].appendChild(parentDiv);
+    document.getElementById('content').appendChild(parentDiv);
 
     const test = document.getElementById('#card_parent');
 
