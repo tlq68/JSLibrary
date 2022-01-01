@@ -33,7 +33,14 @@
       const newBookForm = document.createElement('div');
       newBookForm.id = 'new_book_form';
       document.getElementsByTagName('body')[0].appendChild(newBookForm);
-      newBookForm.innerHTML = `<input placeholder="Title">` + `<br>` + `<input placeholder="Author">` + `<br>` + `<input placeholder="Number of pages">` + `Radio buttons go here`;
+      newBookForm.innerHTML = `<form>
+      <input type="text" id="title" name="title" placeholder="Title" required>
+      <input type="text" id="author" name="author" placeholder="Author" required>
+      <input type="text" id="page_numbers" name="page_numbers" placeholder="Number of pages" required>
+      <label><input type="radio" id="not_completed" name="completion_status" value="Not Completed" checked>Not Completed</label>
+      <label><input type="radio" id="completed" name="completion_status" value="Completed">Completed</label>
+      <input type="submit" value="Submit">
+    </form>`;
       formActive = true;
     }
        else { 
