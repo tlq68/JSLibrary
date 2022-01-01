@@ -22,25 +22,31 @@
 
   function addBookToLibrary() {
     // For new book button
+    let formActive = false;
+
     newBookButton.addEventListener('click', function() {
 
-      content.textContent = initialBook['title'];
+      //content.textContent = initialBook['title'];
 
-      // if(new book form is closed) { open the form} 
+
+       if(formActive === false) {  
       const newBookForm = document.createElement('div');
       newBookForm.id = 'new_book_form';
       document.getElementsByTagName('body')[0].appendChild(newBookForm);
-      newBookForm.innerHTML = ``;
-
-      // else { close the form}
+      newBookForm.innerHTML = `<input placeholder="Title">` + `<br>` + `<input placeholder="Author">` + `<br>` + `<input placeholder="Number of pages">` + `Radio buttons go here`;
+      formActive = true;
+    }
+       else { 
+        //content.textContent = 'The button was triggered'
+         document.getElementById('new_book_form').remove();
+          formActive = false;
+          
+        }
     });
   }
 
   function addToLibraryTestingGround() {
-    const newBookForm = document.createElement('div');
-      newBookForm.id = 'new_book_form';
-      document.getElementsByTagName('body')[0].appendChild(newBookForm);
-      newBookForm.innerHTML = `<input placeholder="Title">` + `<br>` + `<input placeholder="Author">` + `<br>` + `<input placeholder="Number of pages">` + `Radio buttons go here`;
+   
   }
 
   function displayLibrary() {
@@ -57,7 +63,6 @@
       divMaker = document.createElement('div');
       divMaker.className = 'info-card';
       divMaker.id = `card${i+1}`;
-      // `Title: ${myLibrary[i]['title']}` + `Author: ${myLibrary[i]['author']}` + `Pages: ${myLibrary[i]['pages']}` + `Read Status: ${myLibrary[i]['read_status']}` 
       divMaker.innerHTML = `Title: ${myLibrary[i]['title']}` + '<br><hr>' + `Author: ${myLibrary[i]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i]['read_status']}` ;
       document.getElementById('card_parent').appendChild(divMaker);
     }
