@@ -1,4 +1,6 @@
 (function () {
+  let bookIndex = 0;
+
   const p = document.querySelectorAll('p');
   const newBookButton = document.querySelector('#new_book');
   const content = document.querySelector('#content');
@@ -36,7 +38,7 @@
       newBookForm.innerHTML = `<form>
       <input type="text" id="title" name="title" placeholder="Title" required>
       <input type="text" id="author" name="author" placeholder="Author" required>
-      <input type="number" id="page_numbers" name="page_numbers" min="1" placeholder="Number of pages" required>
+      <input type="number" id="page_numbers" name="page_numbers" min="1" max="111111111111111111" placeholder="Number of pages" required>
       <label><input type="radio" id="not_completed" name="completion_status" value="Not Completed" checked>Not Completed</label>
       <label><input type="radio" id="completed" name="completion_status" value="Completed">Completed</label>
       <input type="button" id="submit" value="Submit">
@@ -101,7 +103,7 @@
     }
   }
 
-  function displayLibrary() {
+  function displayLibrary(book_index = 0) {
     let divMaker;
     let parentDiv;
 
@@ -111,12 +113,12 @@
 
     const test = document.getElementById('#card_parent');
 
-    for (i = 0; i < myLibrary.length; i++) {
+    for (i = 0; i < 3; i++) {
       divMaker = document.createElement('div');
       divMaker.className = 'info-card';
       divMaker.id = `card${i+1}`;
-      divMaker.innerHTML = `Title: ${myLibrary[i]['title']}` + '<br><hr>' + `Author: ${myLibrary[i]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i]['read_status']}` ;
-      if (myLibrary[i]['read_status'] === 'Not Completed') {
+      divMaker.innerHTML = `Title: ${myLibrary[i + book_index]['title']}` + '<br><hr>' + `Author: ${myLibrary[i + book_index]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i + book_index]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i + book_index]['read_status']}` ;
+      if (myLibrary[i + book_index]['read_status'] === 'Not Completed') {
         divMaker.classList.add("red-card")
       }
       document.getElementById('card_parent').appendChild(divMaker);
@@ -124,15 +126,45 @@
       //parentDiv.children[1].style.backgroundColor = 'red';
   }
 
+  function subtractBookIndex() {
+    
+    const leftArrow = document.getElementById("left_arrow");
+
+    leftArrow.addEventListener("click", function () {
+      document.getElementById('card_parent').remove();
+      if (bookIndex >= 0) {
+            bookIndex--;
+            displayLibrary(bookIndex);
+          }
+    });
+  
+  }
+
+  function addBookIndex() {
+    const rightArrow = document.getElementById('right_arrow');
+
+    rightArrow.addEventListener("click", function () {
+      document.getElementById('card_parent').remove();
+
+    bookIndex++;
+    displayLibrary(bookIndex);
+    });
+  }
+
 
   function initializeLibrary() {
     let initialBook = new Book("The Hobbit", "J. R. R. Tolkien", 304, "Completed");
   let newBook2 = new Book("Angels and Demons", "Dan Brown", 616, "Not Completed");
   let newBook3 = new Book("The Miserable Mill", "Lemony Snicket", 195, "Completed");
+  let newBook4 = new Book("Dazed and Confused", "Some Guy", 523, "Not Completed");
+  let newBook5 = new Book("Strange Books", "Anon", 95, "Not Completed");
+
 
   myLibrary.push(initialBook);
   myLibrary.push(newBook2);
   myLibrary.push(newBook3);
+  myLibrary.push(newBook4);
+  myLibrary.push(newBook5);
   }
   
 
@@ -142,5 +174,7 @@
   newBookButtonToggle();
   addBooksToLibrary();
   displayLibrary();
+  subtractBookIndex();
+  addBookIndex();
   document.getElementById('test-button').style.color = "red"
 })();
