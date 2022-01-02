@@ -7,6 +7,10 @@
   const content = document.querySelector('#content');
 
 
+  const leftArrow = document.getElementById("left_arrow");
+  const rightArrow = document.getElementById('right_arrow');
+
+
   content.textContent = 'Is this working?';
 
   for (let i = 0; i < p.length; i++) {
@@ -98,7 +102,7 @@
         targetTitle.value = '';
         targetAuthor.value = '';
         targetPages.value = '';
-  displayLibrary();
+  displayLibrary(bookIndex);
 
       // }
     }
@@ -129,30 +133,27 @@
 
   function subtractBookIndex() {
     
-    const leftArrow = document.getElementById("left_arrow");
+    
 
-    leftArrow.addEventListener("click", function () {
-      document.getElementById('card_parent').remove();
+    document.getElementById('card_parent').remove();
       if (bookIndex > 0) {
             bookIndex--;
           }
           displayLibrary(bookIndex);
-          
-    });
+
+    
   
   }
 
   function addBookIndex() {
-    const rightArrow = document.getElementById('right_arrow');
 
-    rightArrow.addEventListener("click", function () {
-      document.getElementById('card_parent').remove();
+    document.getElementById('card_parent').remove();
 
-      if (bookIndex < myLibrary.length - 3) {
-        bookIndex++;
-      }
-      displayLibrary(bookIndex);
-    });
+    if (bookIndex < myLibrary.length - 3) {
+      bookIndex++;
+    }
+    displayLibrary(bookIndex);
+    
   }
 
 
@@ -171,14 +172,38 @@
   myLibrary.push(newBook5);
   }
   
-
+  
 
   
   initializeLibrary();
   newBookButtonToggle();
   addBooksToLibrary();
   displayLibrary();
+  document.addEventListener("keydown", function (event) {
+    if (event.key == 'Enter') {
+      addBooksToLibrary();
+      document.getElementById('card_parent').remove();
+      bookIndex = myLibrary.length - 3;
+      displayLibrary(myLibrary.length - 3);
+    }
+  });
+
+  document.addEventListener("keyup", function (event) {
+    if (event.key == 'ArrowLeft') {
+      subtractBookIndex();
+    } else if (event.key == 'ArrowRight') {
+      addBookIndex();
+    }
+  })
+
+  leftArrow.addEventListener("click", function () {
   subtractBookIndex();
-  addBookIndex();
+      
+          
+  });
+
+  rightArrow.addEventListener("click", function () {
+     addBookIndex();
+  });
   document.getElementById('test-button').style.color = "red"
 })();
