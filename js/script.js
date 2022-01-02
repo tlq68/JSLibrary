@@ -102,7 +102,9 @@
         targetTitle.value = '';
         targetAuthor.value = '';
         targetPages.value = '';
-  displayLibrary(bookIndex);
+
+        bookIndex = myLibrary.length - 3;
+      displayLibrary(myLibrary.length - 3);
 
       // }
     }
@@ -182,9 +184,7 @@
   document.addEventListener("keydown", function (event) {
     if (event.key == 'Enter') {
       addBooksToLibrary();
-      document.getElementById('card_parent').remove();
-      bookIndex = myLibrary.length - 3;
-      displayLibrary(myLibrary.length - 3);
+      
     }
   });
 
