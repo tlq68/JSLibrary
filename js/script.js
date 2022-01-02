@@ -1,4 +1,5 @@
 (function () {
+  // Used to cycle through books
   let bookIndex = 0;
 
   const p = document.querySelectorAll('p');
@@ -132,10 +133,11 @@
 
     leftArrow.addEventListener("click", function () {
       document.getElementById('card_parent').remove();
-      if (bookIndex >= 0) {
+      if (bookIndex > 0) {
             bookIndex--;
-            displayLibrary(bookIndex);
           }
+          displayLibrary(bookIndex);
+          
     });
   
   }
@@ -146,8 +148,10 @@
     rightArrow.addEventListener("click", function () {
       document.getElementById('card_parent').remove();
 
-    bookIndex++;
-    displayLibrary(bookIndex);
+      if (bookIndex < myLibrary.length - 3) {
+        bookIndex++;
+      }
+      displayLibrary(bookIndex);
     });
   }
 
