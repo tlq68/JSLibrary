@@ -124,11 +124,14 @@
     for (i = 0; i < 3; i++) {
       divMaker = document.createElement('div');
       divMaker.className = 'info-card';
-      divMaker.id = `card${i+1}`;
+      divMaker.id = `card${i + bookIndex + 1}`;
 
       titleIndex = i + bookIndex + 1;
 
-      divMaker.innerHTML = `<span class="float-end">${titleIndex}</span>Title: ${myLibrary[i + book_index]['title']}` + '<br><hr>' + `Author: ${myLibrary[i + book_index]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i + book_index]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i + book_index]['read_status']}`;
+      divMaker.innerHTML = `<span class="float-end">${titleIndex}</span>Title: ${myLibrary[i + book_index]['title']}` + '<br><hr>' + `Author: ${myLibrary[i + book_index]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i + book_index]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i + book_index]['read_status']}` + `<button id="card-btn-${i + bookIndex}" class="delete-button">delete</button>`;
+
+
+      // add button with ability to remove self.
       if (myLibrary[i + book_index]['read_status'] === 'Not Completed') {
         divMaker.classList.add("red-card")
       }
@@ -136,6 +139,13 @@
      
 
 
+    }
+
+    deleteButtons = document.getElementsByClassName('delete-button');
+    for (let x = 0; x < deleteButtons.length; x++) {
+      deleteButtons[x].addEventListener("click", function() {
+        removeSelf(`card${x + bookIndex + 1}`)
+      })
     }
       //parentDiv.children[1].style.backgroundColor = 'red';
   }
@@ -181,7 +191,9 @@
   myLibrary.push(newBook5);
   }
   
-  
+  function removeSelf(id) {
+    alert(`Are you sure you want to delete ${id}?`)
+  }
 
   
   initializeLibrary();
