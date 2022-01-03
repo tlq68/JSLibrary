@@ -113,6 +113,7 @@
   function displayLibrary(book_index = 0) {
     let divMaker;
     let parentDiv;
+    let bookNum;
 
     parentDiv = document.createElement('div');
     parentDiv.id = 'card_parent';
@@ -124,11 +125,17 @@
       divMaker = document.createElement('div');
       divMaker.className = 'info-card';
       divMaker.id = `card${i+1}`;
-      divMaker.innerHTML = `Title: ${myLibrary[i + book_index]['title']}` + '<br><hr>' + `Author: ${myLibrary[i + book_index]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i + book_index]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i + book_index]['read_status']}` ;
+
+      titleIndex = i + bookIndex + 1;
+
+      divMaker.innerHTML = `<span class="float-end">${titleIndex}</span>Title: ${myLibrary[i + book_index]['title']}` + '<br><hr>' + `Author: ${myLibrary[i + book_index]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i + book_index]['pages']}`+ '<br><hr>' + `Read Status: ${myLibrary[i + book_index]['read_status']}`;
       if (myLibrary[i + book_index]['read_status'] === 'Not Completed') {
         divMaker.classList.add("red-card")
       }
       document.getElementById('card_parent').appendChild(divMaker);
+     
+
+
     }
       //parentDiv.children[1].style.backgroundColor = 'red';
   }

@@ -7,6 +7,7 @@
   border: 2px solid lightblue;
   width: 15em;
   height: 18em;
+  padding: 3px;
 }
 
 .red-card {
@@ -29,5 +30,8 @@
   height: 20em;
 }
 
-
+.book-number {
+  display: flex;
+  position: absolute;
+}
 
