@@ -30,3 +30,10 @@
   position: absolute;
 }
 
+.form-check-input {
+  user-select: none;
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+}
