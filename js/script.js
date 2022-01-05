@@ -14,7 +14,6 @@
   const rightArrow = document.getElementById('right_arrow');
 
   // Event Listeners
-
   newBookButton.addEventListener('click', function() {
   if (formActive === false) {  
     const newBookForm = document.createElement('div');
@@ -65,19 +64,12 @@
 
   // End Test
 
-  
-
   function Book(title, author, pages, read_status) {
     // The constructor
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read_status = read_status;
-  }
-
-  function newBookButtonToggle() {
-    // For new book button
-    
   }
 
   function addBooksToLibrary() {
@@ -126,8 +118,6 @@
     parentDiv.id = 'card_parent';
     document.getElementById('content').appendChild(parentDiv);
 
-    const test = document.getElementById('#card_parent');
-
     for (i = 0; i < myLibrary.length; i++) {
       if (i >= 3) {
         break;
@@ -142,7 +132,7 @@
       divMaker.innerHTML = `<span class="float-end">${titleIndex}</span>Title: ${myLibrary[i + book_index]['title']}` + '<br><hr>' + `Author: ${myLibrary[i + book_index]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i + book_index]['pages']}`+ '<br><hr>' + `Read Status:  <div class="form-check form-switch">
       <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked${i + book_index}" checked/>
       <label class="form-check-label" for="flexSwitchCheckChecked">Completed</label>
-    </div>` + ` <button id="card-btn-${i + bookIndex}" class="delete-button">delete</button>`;
+      </div>` + ` <button id="card-btn-${i + bookIndex}" class="delete-button">delete</button>`;
 
       if (myLibrary[i + book_index]['read_status'] === 'Not Completed') {
         divMaker.classList.add("red-card")
@@ -154,13 +144,8 @@
       deleteButtons = document.getElementsByClassName('delete-button');
       for (let x = 0; x < deleteButtons.length; x++) {
         deleteButtons[x].addEventListener("click", function() {
-        removeSelf(x);
-
-        infoCards = document.getElementsByClassName('info-card');
-        for (let i = 0; i < infoCards.length; i++) {
-          document.infoCards[i].remove();
-        }
-        console.log(`${bookIndex} book index`)
+        removeSelf(x + bookIndex);
+        console.log(myLibrary)
         displayLibrary(bookIndex)
       })
     }
