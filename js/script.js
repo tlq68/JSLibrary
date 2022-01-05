@@ -32,6 +32,7 @@
     submitButton.addEventListener("click", () => {
       addBooksToLibrary();
     });
+    
     formActive = true;
   } else { 
       document.getElementById('new_book_form').remove();
