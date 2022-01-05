@@ -122,6 +122,9 @@
       if (i >= 3) {
         break;
       }
+      if (bookIndex + i + 1 > myLibrary.length) {
+        break;
+      }
       
       divMaker = document.createElement('div');
       divMaker.className = 'info-card';
