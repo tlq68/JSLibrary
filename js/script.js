@@ -56,14 +56,6 @@
      addBookIndex();
   });
 
-  // Test
-  content.textContent = 'Is this working?';
-  for (let i = 0; i < p.length; i++) {
-    p[i].style.color = "red";
-  }
-
-  // End Test
-
   function Book(title, author, pages, read_status) {
     // The constructor
     this.title = title;
@@ -196,5 +188,4 @@
   addBooksToLibrary();
   displayLibrary();
 
-  document.getElementById('test-button').style.color = "red"
 })();
