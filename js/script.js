@@ -27,6 +27,11 @@
     <label><input type="radio" id="completed" name="completion_status" value="Completed">Completed</label>
     <input type="button" id="submit" value="Submit">
     </form>`;
+
+    const submitButton = document.getElementById('submit');
+    submitButton.addEventListener("click", () => {
+      addBooksToLibrary();
+    });
     formActive = true;
   } else { 
       document.getElementById('new_book_form').remove();
