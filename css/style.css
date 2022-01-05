@@ -5,7 +5,7 @@
 .info-card {
   background-color: rgb(90, 90, 226);
   border: 2px solid lightblue;
-  width: 15em;
+  width: 16em;
   height: 18em;
   padding: 3px;
 }
@@ -17,7 +17,7 @@
 #card_parent {
   display: flex;
   justify-content: space-around;
-  width: 75%;
+  width: 85%;
   border: 2px solid green;
 
   margin: auto;
