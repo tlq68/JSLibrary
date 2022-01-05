@@ -149,6 +149,8 @@
         deleteButtons[x].addEventListener("click", function() {
         removeSelf(x + bookIndex);
         console.log(myLibrary)
+
+        bookIndex = 0;
         displayLibrary(bookIndex)
       })
     }
