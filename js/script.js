@@ -32,7 +32,7 @@
     submitButton.addEventListener("click", () => {
       addBooksToLibrary();
     });
-    
+
     formActive = true;
   } else { 
       document.getElementById('new_book_form').remove();
@@ -133,13 +133,29 @@
       divMaker.innerHTML = `<span class="float-end">${titleIndex}</span>Title: ${myLibrary[i + book_index]['title']}` + '<br><hr>' + `Author: ${myLibrary[i + book_index]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i + book_index]['pages']}`+ '<br><hr>' + `Read Status:  <div class="form-check form-switch">
       <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked${i + book_index}" checked/>
       <label class="form-check-label" for="flexSwitchCheckChecked">Completed</label>
-      </div>` + ` <button id="card-btn-${i + bookIndex}" class="delete-button">delete</button>`;
+      </div>` + ` <button id="card-btn-${i + bookIndex + 1}" class="delete-button">delete</button>`;
 
       if (myLibrary[i + book_index]['read_status'] === 'Not Completed') {
         divMaker.classList.add("red-card")
       }
       document.getElementById('card_parent').appendChild(divMaker);
-      checkboxes = document.getElementById(`flexSwitchCheckChecked${i + book_index}`);
+      checkboxes = document.querySelectorAll(".form-check-input");
+      check = document.getElementById('flexSwitchCheckChecked0')
+
+      for (let i = 0; i < checkboxes.length; i ++ ) {
+        checkboxes[i].addEventListener("click", () => {
+          if (checkboxes[i].checked == true) {
+            document.getElementById(`card${i + 1}`).style.color = 'red'
+          } else {
+            document.getElementById(`card${i + 1}`).style.color = 'blue'
+          }
+        })
+      }
+
+      
+      
+      
+      
     }
 
       deleteButtons = document.getElementsByClassName('delete-button');
