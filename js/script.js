@@ -145,9 +145,9 @@
       for (let i = 0; i < checkboxes.length; i ++ ) {
         checkboxes[i].addEventListener("click", () => {
           if (checkboxes[i].checked == true) {
-            document.getElementById(`card${i + 1}`).style.color = 'red'
+            document.getElementById(`card${i + bookIndex + 1}`).style.color = 'red'
           } else {
-            document.getElementById(`card${i + 1}`).style.color = 'blue'
+            document.getElementById(`card${i + bookIndex + 1}`).style.color = 'blue'
           }
         })
       }
