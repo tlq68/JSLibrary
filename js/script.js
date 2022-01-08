@@ -225,12 +225,13 @@
         checkboxes[i].addEventListener("click", () => {
           console.log(`checkboxes ${`flexSwitchCheckChecked${cardPosition}`}`)
     
-          
+          read_status = myLibrary[cardPosition]['read_status']
           if (checkboxes[i].checked) {
-
-            document.getElementById(`card-label${cardPosition + 1}`).textContent = "Completed";
+            read_status = 'Completed'
+            document.getElementById(`card-label${cardPosition + 1}`).textContent = read_status;
           } else {
-            document.getElementById(`card-label${cardPosition + 1}`).textContent = "Not Completed";
+            read_status = 'Not Completed'
+            document.getElementById(`card-label${cardPosition + 1}`).textContent = read_status;
           }
           const card = document.getElementById(`card${cardPosition + 1}`)
           
