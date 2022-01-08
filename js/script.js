@@ -128,14 +128,14 @@
       <label id="card-label${cardPosition + 1}"class="form-check-label" for="flexSwitchCheckChecked">Completed</label>
       </div>` + ` <button id="card-btn-${cardPosition + 1}" class="delete-button">delete</button>`;
 
-      // This needs to be moved
       if (myLibrary[cardPosition]['read_status'] === 'Not Completed') {
         divMaker.classList.add("red-card");
       }
 
       document.getElementById('card_parent').appendChild(divMaker);
 
-      //checkboxToggle();
+      // checkboxToggle();
+
     }
 
       deleteButtons = document.getElementsByClassName('delete-button');
@@ -157,19 +157,25 @@
   }
 
   function subtractBookIndex() {
+
     document.getElementById('card_parent').remove();
       if (bookIndex > 0) {
             bookIndex--;
     }
           displayLibrary(bookIndex);
+  checkboxToggle();
+
   }
 
   function addBookIndex() {
+
     document.getElementById('card_parent').remove();
     if (bookIndex < myLibrary.length - 3) {
       bookIndex++;
     }
     displayLibrary(bookIndex);
+  checkboxToggle();
+
   }
 
   function initializeLibrary() {
@@ -201,23 +207,27 @@
   }
 
   function checkboxToggle() {
+
     checkboxes = document.querySelectorAll(".form-check-input");
       check = document.getElementById('flexSwitchCheckChecked0');
 
-      //if read status is not completed, button should not be checked and text content should be not completed
 
 
       for (let i = 0; i < checkboxes.length; i++ ) {
+        
         let cardPosition = bookIndex + i;
-        if (myLibrary[i]['read_status'] === 'Not Completed') {
+        if (myLibrary[cardPosition]['read_status'] === 'Not Completed') {
           document.getElementById(`card-label${cardPosition + 1}`).textContent = "Not Completed";
           document.getElementById(`flexSwitchCheckChecked${cardPosition}`).checked = false;
         } 
 
         
         checkboxes[i].addEventListener("click", () => {
+          console.log(`checkboxes ${`flexSwitchCheckChecked${cardPosition}`}`)
     
+          
           if (checkboxes[i].checked) {
+
             document.getElementById(`card-label${cardPosition + 1}`).textContent = "Completed";
           } else {
             document.getElementById(`card-label${cardPosition + 1}`).textContent = "Not Completed";
