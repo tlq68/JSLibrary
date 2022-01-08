@@ -17,6 +17,7 @@
   newBookButton.addEventListener('click', function() {
   if (formActive === false) {  
     const newBookForm = document.createElement('div');
+
     newBookForm.id = 'new_book_form';
     document.getElementsByTagName('body')[0].appendChild(newBookForm);
     newBookForm.innerHTML = `<form>
@@ -32,8 +33,8 @@
     submitButton.addEventListener("click", () => {
       addBooksToLibrary();
     });
-
     formActive = true;
+
   } else { 
       document.getElementById('new_book_form').remove();
       formActive = false;
@@ -76,7 +77,7 @@
     const targetPages = document.getElementById('page_numbers');
 
     if (targetTitle && targetTitle.value && targetAuthor.value && targetPages.value) {
-      document.getElementById('card_parent').remove();
+      removeSelfBySelector('#card_parent');
 
       let read_status_value;
       let targetNotCompleted = document.getElementById('not_completed'); 
@@ -87,13 +88,12 @@
       } else {
         read_status_value = targetCompleted.value;
       }
-        console.log(myLibrary)
         let newBook = new Book(targetTitle.value, targetAuthor.value, targetPages.value, read_status_value)
         myLibrary.push(newBook);
-        targetTitle.value = '';
-        targetAuthor.value = '';
-        targetPages.value = '';
-
+        resetValue(targetTitle);
+        resetValue(targetAuthor);
+        resetValue(targetPages);
+         
         bookIndexSize();
         displayLibrary(bookIndex);
     }
@@ -108,66 +108,52 @@
   }
 
   function displayLibrary(book_index = 0) {
-    let divMaker;
-    let parentDiv;
-    let bookNum;
-
-    parentDiv = document.createElement('div');
-    parentDiv.id = 'card_parent';
-    document.getElementById('content').appendChild(parentDiv);
+    createChild();
 
     for (i = 0; i < myLibrary.length; i++) {
-      if (i >= 3) {
-        break;
-      }
-      if (bookIndex + i + 1 > myLibrary.length) {
+    let cardPosition = bookIndex + i;
+
+      if (i >= 3 || cardPosition + 1 > myLibrary.length) {
         break;
       }
       
-      divMaker = document.createElement('div');
+      let divMaker = document.createElement('div');
       divMaker.className = 'info-card';
-      divMaker.id = `card${i + bookIndex + 1}`;
+      divMaker.id = `card${cardPosition + 1}`;
 
-      titleIndex = i + bookIndex + 1;
+      titleIndex = cardPosition + 1;
 
-      divMaker.innerHTML = `<span class="float-end">${titleIndex}</span>Title: ${myLibrary[i + book_index]['title']}` + '<br><hr>' + `Author: ${myLibrary[i + book_index]['author']}` + '<br><hr>' + `Pages: ${myLibrary[i + book_index]['pages']}`+ '<br><hr>' + `Read Status:  <div class="form-check form-switch">
-      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked${i + book_index}" checked/>
-      <label class="form-check-label" for="flexSwitchCheckChecked">Completed</label>
-      </div>` + ` <button id="card-btn-${i + bookIndex + 1}" class="delete-button">delete</button>`;
+      divMaker.innerHTML = `<span class="float-end">${titleIndex}</span>Title: ${myLibrary[cardPosition]['title']}` + '<br><hr>' + `Author: ${myLibrary[cardPosition]['author']}` + '<br><hr>' + `Pages: ${myLibrary[cardPosition]['pages']}`+ '<br><hr>' + `Read Status:  <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked${cardPosition}" checked/>
+      <label id="card-label${cardPosition + 1}"class="form-check-label" for="flexSwitchCheckChecked">Completed</label>
+      </div>` + ` <button id="card-btn-${cardPosition + 1}" class="delete-button">delete</button>`;
 
-      if (myLibrary[i + book_index]['read_status'] === 'Not Completed') {
-        divMaker.classList.add("red-card")
+      // This needs to be moved
+      if (myLibrary[cardPosition]['read_status'] === 'Not Completed') {
+        divMaker.classList.add("red-card");
       }
+
       document.getElementById('card_parent').appendChild(divMaker);
-      checkboxes = document.querySelectorAll(".form-check-input");
-      check = document.getElementById('flexSwitchCheckChecked0')
 
-      for (let i = 0; i < checkboxes.length; i ++ ) {
-        checkboxes[i].addEventListener("click", () => {
-          if (checkboxes[i].checked == true) {
-            document.getElementById(`card${i + bookIndex + 1}`).style.color = 'red'
-          } else {
-            document.getElementById(`card${i + bookIndex + 1}`).style.color = 'blue'
-          }
-        })
-      }
-
-      
-      
-      
-      
+      //checkboxToggle();
     }
 
       deleteButtons = document.getElementsByClassName('delete-button');
       for (let x = 0; x < deleteButtons.length; x++) {
         deleteButtons[x].addEventListener("click", function() {
-        removeSelf(x + bookIndex);
+        removeSelfByIndex(x + bookIndex);
         console.log(myLibrary)
 
         bookIndex = 0;
         displayLibrary(bookIndex)
       })
     }
+  }
+
+  function createChild() {
+    let parentDiv = document.createElement('div');
+    parentDiv.id = 'card_parent';
+    content.appendChild(parentDiv);
   }
 
   function subtractBookIndex() {
@@ -180,7 +166,6 @@
 
   function addBookIndex() {
     document.getElementById('card_parent').remove();
-
     if (bookIndex < myLibrary.length - 3) {
       bookIndex++;
     }
@@ -202,12 +187,54 @@
     myLibrary.push(newBook5);
   }
   
-  function removeSelf(index) {
+  function removeSelfByIndex(index) {
     document.getElementById('card_parent').remove();
     myLibrary.splice(index, 1);
   }
+
+  function removeSelfBySelector(selector) {
+    document.querySelector(selector).remove();
+  }
+
+  function resetValue(target) {
+    target.value = '';
+  }
+
+  function checkboxToggle() {
+    checkboxes = document.querySelectorAll(".form-check-input");
+      check = document.getElementById('flexSwitchCheckChecked0');
+
+      //if read status is not completed, button should not be checked and text content should be not completed
+
+
+      for (let i = 0; i < checkboxes.length; i++ ) {
+        let cardPosition = bookIndex + i;
+        if (myLibrary[i]['read_status'] === 'Not Completed') {
+          document.getElementById(`card-label${cardPosition + 1}`).textContent = "Not Completed";
+          document.getElementById(`flexSwitchCheckChecked${cardPosition}`).checked = false;
+        } 
+
+        
+        checkboxes[i].addEventListener("click", () => {
+    
+          if (checkboxes[i].checked) {
+            document.getElementById(`card-label${cardPosition + 1}`).textContent = "Completed";
+          } else {
+            document.getElementById(`card-label${cardPosition + 1}`).textContent = "Not Completed";
+          }
+          const card = document.getElementById(`card${cardPosition + 1}`)
+          
+          card.classList.toggle('red-card');
+
+         console.log(card.id)
+        })
+      }
+  }
+
+
   initializeLibrary();
   addBooksToLibrary();
   displayLibrary();
+  checkboxToggle();
 
 })();
